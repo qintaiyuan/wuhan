@@ -11,6 +11,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final SplashController controller = Get.find();
+
   @override
   void initState() {
     super.initState();
@@ -18,7 +19,6 @@ class _SplashPageState extends State<SplashPage> {
       // 在页面加载完成后立即调用检测方法
       controller.checkCurState();
     });
-
   }
 
   @override
@@ -26,9 +26,9 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
         body: Center(
       child: Image.asset(
-          'assets/images/ic_splash.png',
-          height: 100,
-          width: 100,
+        'assets/images/ic_splash.png',
+        height: 100,
+        width: 100,
       ),
     ));
   }

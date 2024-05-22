@@ -22,7 +22,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.LOGIN,
-      page: () => const LoginPage(),
+      page: () => LoginPage(),
       binding: LoginBinding(),
       transition: Transition.noTransition, // 设置页面跳转动画
     )

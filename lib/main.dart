@@ -6,7 +6,6 @@ import 'package:wuhan/routes/app_routes.dart';
 import 'package:wuhan/services/app_initializer_service.dart';
 import 'package:wuhan/theme/app_theme.dart';
 import 'package:wuhan/transliate/app_translations.dart';
-import 'package:wuhan/views/splash_page.dart';
 
 void main() async {
   // 确保 Flutter 框架正确初始化的实用方法，

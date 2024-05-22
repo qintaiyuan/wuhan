@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/constants.dart';
 import 'package:wuhan/models/user_model.dart';
@@ -18,7 +19,9 @@ class UserService extends GetxService {
     try {
       user.value = UserAccount.fromJson(_dataService.getMap(userInfoCache));
     } catch (e) {
-      print('Error loading user from cache: $e');
+      if (kDebugMode) {
+        print('Error loading user from cache: $e');
+      }
     }
   }
 
@@ -31,7 +34,9 @@ class UserService extends GetxService {
     try {
       _dataService.putMap(userInfoCache, user.toJson());
     } catch (e) {
-      print('Error saving user to cache: $e');
+      if (kDebugMode) {
+        print('Error saving user to cache: $e');
+      }
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -7,7 +8,9 @@ class DataService extends GetxService{
   late Box dataBox;
   Future<DataService> init() async {
     dataBox = Hive.box(cacheFlageBox);
-    print('dataService init');
+    if (kDebugMode) {
+      print('dataService init');
+    }
     return this;
   }
 
