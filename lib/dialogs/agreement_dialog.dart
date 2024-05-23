@@ -8,11 +8,12 @@ import 'package:wuhan/widgets/submit_button.dart';
 import '../constants.dart';
 import '../controllers/agreement_controller.dart';
 
-class AgreementBottomSheet extends StatelessWidget {
-  final AgreementController controller = Get.find<AgreementController>();
+class AgreementBottomSheet extends GetView<AgreementController> {
+  const AgreementBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.find<AgreementController>();
     return PopScope(
       canPop: false,
       child: Padding(

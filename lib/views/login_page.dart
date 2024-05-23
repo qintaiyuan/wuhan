@@ -7,12 +7,11 @@ import '../widgets/phone_input_field.dart';
 import '../widgets/verification_code_input_field.dart';
 import '../widgets/submit_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final LoginController controller = Get.find();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.colorPageBackground,
@@ -44,15 +43,22 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 40),
-            PhoneInputField(controller: controller),
+            PhoneInputField(
+                onPhoneNumberChanged: (phone) =>
+                    {controller.onPhoneNumberChanged(phone)}),
             const SizedBox(height: 12),
-            VerificationCodeInputField(controller: controller),
+            Obx(() => VerificationCodeInputField(
+                  phoneNum: controller.phoneNumber.value,
+                  onVerificationCodeChanged: (code) => {
+                    controller.onVerificationCodeChanged(code)
+                  },
+                )),
             const SizedBox(height: 50),
             Obx(() => SubmitButton(
-              text: 'login'.tr,
-              enable: controller.isButtonEnabled.value,
-              onPressed: controller.login,
-            )),
+                  text: 'login'.tr,
+                  enable: controller.isButtonEnabled.value,
+                  onPressed: controller.login,
+                )),
             const SizedBox(height: 12),
             AgreementCheckboxes(controller: controller),
           ],
