@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/theme/app_colors.dart';
-import '../controllers/login_controller.dart';
-import '../services/navigation_service.dart';
-import '../constants.dart';
+
+import '../../../constants/constants.dart';
+import '../../../services/navigation_service.dart';
+import '../../controllers/login_controller.dart';
 
 class AgreementCheckboxes extends StatelessWidget {
   final LoginController controller;

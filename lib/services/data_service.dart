@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../constants.dart';
+import '../constants/constants.dart';
 
 class DataService extends GetxService{
   late Box dataBox;

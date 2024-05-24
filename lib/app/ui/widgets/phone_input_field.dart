@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wuhan/controllers/phone_input_controller.dart';
 import 'package:wuhan/theme/app_colors.dart';
+
+import '../../controllers/phone_input_controller.dart';
 
 class PhoneInputField extends GetView<PhoneInputController> {
   final Function(String) onPhoneNumberChanged;

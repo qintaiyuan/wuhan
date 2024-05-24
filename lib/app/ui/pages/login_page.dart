@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/theme/app_colors.dart';
-import '../controllers/login_controller.dart';
+import '../../controllers/login_controller.dart';
 import '../widgets/agreement_checkboxes.dart';
 import '../widgets/phone_input_field.dart';
 import '../widgets/verification_code_input_field.dart';

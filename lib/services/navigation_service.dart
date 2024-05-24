@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../routes/app_routes.dart';
+import '../app/routes/app_routes.dart';
 
 class NavigationService {
   static void offAndToHomePage() {

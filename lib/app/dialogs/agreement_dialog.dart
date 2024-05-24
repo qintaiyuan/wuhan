@@ -3,10 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/services/navigation_service.dart';
 import 'package:wuhan/theme/app_colors.dart';
-import 'package:wuhan/widgets/submit_button.dart';
-
-import '../constants.dart';
+import '../../constants/constants.dart';
 import '../controllers/agreement_controller.dart';
+import '../ui/widgets/submit_button.dart';
 
 class AgreementBottomSheet extends GetView<AgreementController> {
   const AgreementBottomSheet({super.key});

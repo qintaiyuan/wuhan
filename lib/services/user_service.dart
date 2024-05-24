@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:wuhan/constants.dart';
-import 'package:wuhan/models/user_model.dart';
+import 'package:wuhan/constants/constants.dart';
 
+import '../app/data/models/user_model.dart';
 import 'data_service.dart';
 
 class UserService extends GetxService {

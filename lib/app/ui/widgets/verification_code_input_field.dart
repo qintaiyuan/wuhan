@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/theme/app_colors.dart';
 
-import '../controllers/verification_code_input_controller.dart';
+import '../../controllers/verification_code_input_controller.dart';
+
 
 class VerificationCodeInputField
     extends GetView<VerificationCodeInputController> {
@@ -18,6 +19,7 @@ class VerificationCodeInputField
   Widget build(BuildContext context) {
     Get.put(VerificationCodeInputController());
     controller.onVerificationCodeChangedCallback = onVerificationCodeChanged;
+    controller.phoneNum.value = phoneNum;
     return SizedBox(
       height: 50,
       child: Stack(

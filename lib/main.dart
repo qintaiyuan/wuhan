@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:wuhan/routes/app_pages.dart';
-import 'package:wuhan/routes/app_routes.dart';
 import 'package:wuhan/services/app_initializer_service.dart';
 import 'package:wuhan/theme/app_theme.dart';
 import 'package:wuhan/transliate/app_translations.dart';
+
+import 'app/routes/app_pages.dart';
+import 'app/routes/app_routes.dart';
 
 void main() async {
   // 确保 Flutter 框架正确初始化的实用方法，

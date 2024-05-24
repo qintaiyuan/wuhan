@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:wuhan/constants.dart';
+import 'package:wuhan/constants/constants.dart';
 
-import '../bindings/initial_binding.dart';
+import '../app/bindings/initial_binding.dart';
 
 class AppInitializer extends GetxService {
   // 初始化函数

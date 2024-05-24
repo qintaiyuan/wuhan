@@ -14,7 +14,7 @@ class UserAccount {
     return UserAccount(
       userId: json['userId'],
       userName: json['userName'],
-      passToken: json['passToke'],
+      passToken: json['passToken'],
       phone: json['phone'],
     );
   }
