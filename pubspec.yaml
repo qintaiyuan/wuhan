@@ -18,6 +18,8 @@ dependencies:
   crypto: ^3.0.1
   cookie_jar: ^3.0.1
   uuid: ^3.0.4
+  package_info: ^2.0.2
+  device_info: ^2.0.2
 
 dev_dependencies:
   flutter_test:

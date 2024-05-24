@@ -1,5 +1,7 @@
+import 'dart:ffi';
+
 class UserAccount {
-  final String userId;
+  final int userId;
   final String userName;
   final String passToken;
   final String phone;
@@ -9,6 +11,15 @@ class UserAccount {
       required this.userName,
       required this.passToken,
       required this.phone});
+
+  // factory UserAccount.fromJson(Map<String, dynamic> json) {
+  //   return UserAccount(
+  //     userId: json['userId'],
+  //     userName: json['userName'],
+  //     passToken: json['passToken'],
+  //     phone: json['phone'],
+  //   );
+  // }
 
   factory UserAccount.fromJson(Map<String, dynamic> json) {
     return UserAccount(

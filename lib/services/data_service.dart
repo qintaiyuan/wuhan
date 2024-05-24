@@ -37,4 +37,12 @@ class DataService extends GetxService{
   void putMap(String key , Map<String, dynamic> value) {
     dataBox.put(key, value);
   }
+
+  void put(String key, dynamic value) {
+    dataBox.put(key, value);
+  }
+
+  dynamic get(String key) {
+    return dataBox.get(key);
+  }
 }

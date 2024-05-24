@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../services/network_service.dart';
+import '../network/services/network_service.dart';
 class VerificationCodeInputController extends GetxController {
   Function(String)? onVerificationCodeChangedCallback;
   var countdown = 0.obs;
@@ -58,7 +58,7 @@ class VerificationCodeInputController extends GetxController {
       );
       Get.snackbar('message', response.message.toString());
       print(response.message);
-      // startCountdown();
+      startCountdown();
     } catch (e) {
       Get.snackbar('error'.tr, e.toString());
       print("-------error=${e.toString()}");

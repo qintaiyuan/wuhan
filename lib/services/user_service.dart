@@ -15,6 +15,10 @@ class UserService extends GetxService {
     super.onInit();
   }
 
+  bool isSignedIn() {
+    return user.value != null ;
+}
+
   Future<void> _loadUserFromCache() async {
     try {
       user.value = UserAccount.fromJson(_dataService.getMap(userInfoCache));

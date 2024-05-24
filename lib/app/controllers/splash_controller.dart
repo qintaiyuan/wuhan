@@ -22,7 +22,7 @@ class SplashController extends GetxController {
   }
   void _showPermissionsDialog() {
     Get.bottomSheet(
-      AgreementBottomSheet(),
+      const AgreementBottomSheet(),
       backgroundColor: AppColors.colorPageBackground,
       isScrollControlled: true,
       // Ensures the height is adaptive
