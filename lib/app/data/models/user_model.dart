@@ -12,15 +12,6 @@ class UserAccount {
       required this.passToken,
       required this.phone});
 
-  // factory UserAccount.fromJson(Map<String, dynamic> json) {
-  //   return UserAccount(
-  //     userId: json['userId'],
-  //     userName: json['userName'],
-  //     passToken: json['passToken'],
-  //     phone: json['phone'],
-  //   );
-  // }
-
   factory UserAccount.fromJson(Map<String, dynamic> json) {
     return UserAccount(
       userId: json['userId'],

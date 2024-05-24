@@ -8,7 +8,12 @@ class InitialBindings extends Bindings {
   @override
   Future<void> dependencies()  async{
     await Get.putAsync<DataService>(() async => await DataService().init());
-    Get.lazyPut(() => UserService());
+    // 使用 Get.putAsync 确保初始化完成后才继续执行
+    await Get.putAsync<UserService>(() async {
+      final userService = UserService();
+      await userService.onInit();
+      return userService;
+    });
     Get.lazyPut(() => AppInfoService());
     await Get.putAsync<NetworkService>(() async => NetworkService());
   }

@@ -15,12 +15,21 @@ class UserService extends GetxService {
     super.onInit();
   }
 
+  // Future<UserService> init() async {
+  //   await _loadUserFromCache();
+  //   if (kDebugMode) {
+  //     print('UserService init');
+  //   }
+  //   return this;
+  // }
+
   bool isSignedIn() {
-    return user.value != null ;
-}
+    return user.value != null;
+  }
 
   Future<void> _loadUserFromCache() async {
     try {
+      _dataService.getMap(userInfoCache);
       user.value = UserAccount.fromJson(_dataService.getMap(userInfoCache));
     } catch (e) {
       if (kDebugMode) {

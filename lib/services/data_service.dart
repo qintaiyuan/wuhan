@@ -31,7 +31,11 @@ class DataService extends GetxService{
   }
 
   Map<String, dynamic> getMap(String key) {
-    return dataBox.get(key);
+    final data = dataBox.get(key);
+    if (data is Map) {
+      return Map<String, dynamic>.from(data);
+    }
+    throw Exception('Data for key $key is not a Map<String, dynamic>');
   }
 
   void putMap(String key , Map<String, dynamic> value) {
