@@ -15,14 +15,6 @@ class UserService extends GetxService {
     super.onInit();
   }
 
-  // Future<UserService> init() async {
-  //   await _loadUserFromCache();
-  //   if (kDebugMode) {
-  //     print('UserService init');
-  //   }
-  //   return this;
-  // }
-
   bool isSignedIn() {
     return user.value != null;
   }

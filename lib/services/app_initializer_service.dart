@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wuhan/constants/constants.dart';
 
 import '../app/bindings/initial_binding.dart';
+import '../app/data/adapter/device_adapter.dart';
 
 class AppInitializer extends GetxService {
   // 初始化函数
@@ -20,8 +21,8 @@ class AppInitializer extends GetxService {
   Future<void> _initHive() async {
     // 初始化Hive
     await Hive.initFlutter();
-    // 打开一个名为myBox的Box（类似于数据库中的表）
-    await Hive.openBox(cacheFlageBox);
+    // 注册 DeviceAdapter
+    Hive.registerAdapter(DeviceAdapter());
   }
 
   //

@@ -18,8 +18,9 @@ dependencies:
   crypto: ^3.0.1
   cookie_jar: ^3.0.1
   uuid: ^3.0.4
-  package_info: ^2.0.2
-  device_info: ^2.0.2
+  package_info: ^2.0.2 # 获取安装波相关信息
+  device_info: ^2.0.2 # 获取设备（手机）相关信息
+  flutter_svg: ^2.0.4
 
 dev_dependencies:
   flutter_test:

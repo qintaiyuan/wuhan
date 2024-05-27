@@ -9,7 +9,7 @@ import '../../controllers/login_controller.dart';
 class AgreementCheckboxes extends StatelessWidget {
   final LoginController controller;
 
-  const AgreementCheckboxes({required this.controller, Key? key}) : super(key: key);
+  const AgreementCheckboxes({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,8 @@ import '../constants/constants.dart';
 class DataService extends GetxService{
   late Box dataBox;
   Future<DataService> init() async {
+    // 打开一个名为myBox的Box（类似于数据库中的表）
+    await Hive.openBox(cacheFlageBox);
     dataBox = Hive.box(cacheFlageBox);
     if (kDebugMode) {
       print('dataService init');
