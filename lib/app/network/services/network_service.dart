@@ -1,19 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:wuhan/app/data/models/unlogin_event_model.dart';
 import 'package:wuhan/app/network/interceptor/add_cookies_interceptor.dart';
 import 'package:wuhan/app/network/interceptor/received_cookies_interceptor.dart';
 
 import '../../../constants/constants.dart';
+import '../../../services/connectivity_service.dart';
+import '../../../services/event_bus_service.dart';
 import '../../data/models/response_model.dart';
 import '../interceptor/header_interceptor.dart';
 
 class NetworkService extends GetxService {
   late Dio _dio;
+  final ConnectivityService _connectivityService =
+      Get.find<ConnectivityService>();
 
   @override
   void onInit() {
     super.onInit();
-
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl, // 替换为实际的 base URL
       connectTimeout: 5000,
@@ -32,13 +36,10 @@ class NetworkService extends GetxService {
     Map<String, dynamic>? queryParameters,
     required T Function(Object? json) fromJsonT,
   }) async {
-    try {
-      final response = await _dio.get(path, queryParameters: queryParameters);
-      return ResponseData<T>.fromJson(response.data, fromJsonT);
-    } catch (e) {
-      _handleError(e);
-      rethrow;
-    }
+    return _request(
+      () => _dio.get(path, queryParameters: queryParameters),
+      fromJsonT,
+    );
   }
 
   Future<ResponseData<T>> post<T>(
@@ -46,19 +47,31 @@ class NetworkService extends GetxService {
     Map<String, dynamic>? data,
     required T Function(Object? json) fromJsonT,
   }) async {
-    try {
-      final response = await _dio.post(path, data: data);
-      return ResponseData<T>.fromJson(response.data, fromJsonT);
-    } catch (e) {
-      _handleError(e);
-      rethrow;
-    }
+    return _request(
+      () => _dio.post(path, data: data),
+      fromJsonT,
+    );
   }
 
-  void _handleError(dynamic error) {
-    // 统一处理错误
-    if (error is DioError) {
-      Get.snackbar('Error', error.message);
+  Future<ResponseData<T>> _request<T>(
+      requestFunction, T Function(Object? json) fromJsonT) async {
+    if (!_connectivityService.isConnected.value) {
+      // Get.snackbar('error'.tr, 'netNotConnected'.tr);
+      return ResponseData.error(message: 'netNotConnected'.tr);
+    }
+
+    try {
+      final response = await requestFunction();
+      int? code = response.data['code'] as int?;
+      String? message = response.data['message'] as String?;
+      if (code == 201) {
+        Get.find<EventBus>().fire(UnLoginEvent());
+        return ResponseData.error(code: code, message: message);
+      } else {
+        return ResponseData<T>.fromJson(response.data, fromJsonT);
+      }
+    } catch (e) {
+      return ResponseData.error(code: 0, message: e.toString());
     }
   }
 }

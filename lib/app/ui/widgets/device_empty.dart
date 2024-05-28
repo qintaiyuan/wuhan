@@ -9,13 +9,23 @@ class DeviceEmpty extends StatelessWidget {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
-        Image.asset('assets/images/iv_device_add_bg.png'),
+        Positioned.fill(
+          child: Image.asset(
+            'assets/images/iv_device_add_bg.png',
+            fit: BoxFit.cover,
+          ),
+        ),
         Positioned(
           right: 16,
           top: 46,
           child: _buildAccountBtn(),
         ),
-        Positioned(top: 106, child: _buildAddDeviceView())
+        Positioned(
+            top: 106,
+            left: 14,
+            right: 14,
+            child: _buildAddDeviceView()
+        )
       ],
     );
   }
@@ -42,7 +52,6 @@ class DeviceEmpty extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 168,
-      margin: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10), // 设置圆角半径
         color: AppColors.colorWhite, // 设置背景色

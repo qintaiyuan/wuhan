@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wuhan/app/data/models/user_model.dart';
 import 'package:wuhan/services/navigation_service.dart';
 
-import '../../services/user_service.dart';
-import '../network/services/network_service.dart';
+import '../data/repositories/passport_respository.dart';
 
 class LoginController extends GetxController {
   var phoneNumber = ''.obs;
   var verificationCode = ''.obs;
   var isButtonEnabled = false.obs;
   var agreeToTerms = false.obs;
-  final NetworkService _networkService = Get.find();
-  final UserService _userService = Get.find();
+  final PassportRespository _passportRepository = Get.find();
+
   TextEditingController verificationCodeController = TextEditingController();
 
   void onPhoneNumberChanged(String value) {
@@ -43,27 +41,16 @@ class LoginController extends GetxController {
 
     try {
       // 发送登录请求
-      var response = await _networkService.post<UserAccount>(
-        '/passport/v1/login',
-        data: {
-          "identityType": "1",
-          "identifier": phoneNumber.value,
-          "credential": verificationCode.value,
-          "platform": "1"
-        },
-        fromJsonT: (json) => UserAccount.fromJson(json as Map<String, dynamic>),
-      );
-
-      if (response.code == 200) {
-        Get.snackbar('message', "登录成功");
-        _userService.setUser(response.data as UserAccount);
+      var response = await _passportRepository.fetchLogin(
+          phoneNumber.value, verificationCode.value);
+      if (response.isSuccess()) {
+        Get.snackbar('message'.tr, 'loginSuccess'.tr);
         NavigationService.offAndToHomePage();
       } else {
         Get.snackbar('error'.tr, response.message.toString());
-        print(response.message);
       }
     } catch (e) {
-      Get.snackbar('error'.tr, 'networkError'.tr);
+      Get.snackbar('error'.tr, 'netNotConnected'.tr);
       print('Network error: $e');
     }
   }

@@ -14,6 +14,7 @@ class HomePage extends GetView<HomeController> {
         final currentDevice = controller.currentDevice.value;
         if (currentDevice == null) {
           return const DeviceEmpty();
+          // return FullWidthContainerExample();
         } else {
           return Center(child: Text('Connected to: ${currentDevice.nickname}'));
         }

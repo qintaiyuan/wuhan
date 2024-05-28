@@ -52,10 +52,14 @@ class AppTranslations extends Translations {
       "sendVerificationCode": "发送验证码",
       "login": "登录",
       "error": "错误",
+      "message": "消息",
       "invalidPhoneNumber": "请输入有效的手机号",
       "agreeToTermsError": "请勾选同意用户条款",
       "invalidCredentials": "请输入有效的手机号和验证码",
       "termsAgreementPrefixTip": "登录即表示您同意我们的",
+      "netNotConnected": "网络连接异常，请重试",
+      "sendSuccess": "发送成功",
+      "loginSuccess": "登录成功"
     },
   };
 }

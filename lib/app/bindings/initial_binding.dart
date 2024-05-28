@@ -2,8 +2,10 @@ import 'package:get/get.dart';
 import 'package:wuhan/services/app_info_service.dart';
 import 'package:wuhan/services/data_service.dart';
 import 'package:wuhan/app/network/services/network_service.dart';
+import 'package:wuhan/services/event_bus_service.dart';
 import 'package:wuhan/services/user_service.dart';
 
+import '../../services/connectivity_service.dart';
 import '../../services/device_service.dart';
 
 class InitialBindings extends Bindings {
@@ -16,8 +18,11 @@ class InitialBindings extends Bindings {
       await userService.onInit();
       return userService;
     });
-    Get.lazyPut(() => AppInfoService());
+    await Get.putAsync(() async => await AppInfoService().init());
+    Get.put(EventBus());
+    Get.lazyPut<ConnectivityService>(() => ConnectivityService());
     await Get.putAsync<NetworkService>(() async => NetworkService());
     await Get.putAsync<DeviceService>(() async => await DeviceService().init());
+
   }
 }

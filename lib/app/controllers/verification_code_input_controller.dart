@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:wuhan/app/data/repositories/passport_respository.dart';
 
 import '../network/services/network_service.dart';
+
 class VerificationCodeInputController extends GetxController {
   Function(String)? onVerificationCodeChangedCallback;
   var countdown = 0.obs;
   var phoneNum = "".obs;
   var isEnable = false.obs;
   TextEditingController verificationCodeController = TextEditingController();
-  final NetworkService _networkService = Get.find();
+  final PassportRespository _passportRepository = Get.find();
 
   @override
   void onInit() {
@@ -43,25 +45,20 @@ class VerificationCodeInputController extends GetxController {
     if (onVerificationCodeChangedCallback != null) {
       onVerificationCodeChangedCallback!(formatted);
     }
-    // _updateButtonState();
   }
 
   Future<void> sendVerificationCode() async {
     try {
-      var response = await _networkService.post(
-        '/passport/v1/codes',
-        data: {
-          'phone': phoneNum.value,
-          'type': "1",
-        },
-        fromJsonT: (json) => json as bool,
-      );
-      Get.snackbar('message', response.message.toString());
-      print(response.message);
-      startCountdown();
+      var response =
+          await _passportRepository.fetchVerificationCode(phoneNum.value);
+      if (response.isSuccess()) {
+        Get.snackbar('message'.tr, 'sendSuccess'.tr);
+        startCountdown();
+      } else {
+        Get.snackbar('error'.tr, response.message?? 'netNotConnected'.tr);
+      }
     } catch (e) {
-      Get.snackbar('error'.tr, e.toString());
-      print("-------error=${e.toString()}");
+      Get.snackbar('error'.tr, 'netNotConnected'.tr);
     }
   }
 }

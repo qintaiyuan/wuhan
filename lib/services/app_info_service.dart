@@ -2,15 +2,14 @@ import 'package:device_info/device_info.dart';
 import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
 
-class AppInfoService extends GetxService{
+class AppInfoService extends GetxService {
   var appVersion = 'Unknown'.obs;
   var deviceId = 'Unknown'.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    _initAppVersion();
-    _initDeviceId();
+  Future<AppInfoService> init() async {
+    await _initAppVersion();
+    await _initDeviceId();
+    return this;
   }
 
   Future<void> _initAppVersion() async {

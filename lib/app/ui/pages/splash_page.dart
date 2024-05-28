@@ -16,6 +16,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    print('splash----initState()');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // 在页面加载完成后立即调用检测方法
       controller.checkCurState();
@@ -24,6 +25,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('splash----build()');
     return Scaffold(
         body: Center(
       child: Image.asset(
