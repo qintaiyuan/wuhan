@@ -4,30 +4,31 @@ import 'package:wuhan/theme/app_colors.dart';
 
 import '../../controllers/verification_code_input_controller.dart';
 
-
-class VerificationCodeInputField
-    extends GetView<VerificationCodeInputController> {
-  final Function(String) onVerificationCodeChanged;
-  final String phoneNum;
+class VerificationCodeInputField extends StatelessWidget {
+  final Stream<String> stream;
+  final RxString verificationCode;
 
   const VerificationCodeInputField(
-      {super.key,
-      required this.onVerificationCodeChanged,
-      required this.phoneNum});
+      {super.key, required this.stream, required this.verificationCode});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(VerificationCodeInputController());
-    controller.onVerificationCodeChangedCallback = onVerificationCodeChanged;
-    controller.phoneNum.value = phoneNum;
+    final VerificationCodeInputController controller =
+        Get.put<VerificationCodeInputController>(
+      VerificationCodeInputController(),
+      tag: '${UniqueKey().toString()}_verification_code',
+      permanent: false,
+    );
+    verificationCode.bindStream(controller.verificationCode.stream);
+    controller.phoneNum.bindStream(stream);
     return SizedBox(
       height: 50,
       child: Stack(
         alignment: Alignment.centerRight,
         children: [
           _buildBoxDecoration(),
-          _buildTextField(),
-          _buildSendCode(),
+          _buildTextField(controller),
+          _buildSendCode(controller),
         ],
       ),
     );
@@ -36,15 +37,16 @@ class VerificationCodeInputField
   Widget _buildBoxDecoration() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.colorWhite,
         borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }
 
-  Widget _buildSendCode() {
+  Widget _buildSendCode(VerificationCodeInputController controller) {
     return Obx(() => TextButton(
-          onPressed: (controller.countdown.value == 0 && phoneNum.length >= 11)
+          onPressed: (controller.countdown.value == 0 &&
+                  controller.phoneNum.value.length >= 11)
               ? controller.sendVerificationCode
               : null,
           child: Text(
@@ -55,7 +57,7 @@ class VerificationCodeInputField
         ));
   }
 
-  Widget _buildTextField() {
+  Widget _buildTextField(VerificationCodeInputController controller) {
     return TextField(
       keyboardType: TextInputType.number,
       controller: controller.verificationCodeController,

@@ -4,15 +4,19 @@ import 'package:wuhan/theme/app_colors.dart';
 
 import '../../controllers/phone_input_controller.dart';
 
-class PhoneInputField extends GetView<PhoneInputController> {
-  final Function(String) onPhoneNumberChanged;
+class PhoneInputField extends StatelessWidget {
+  final RxString phoneNumber;
 
-  const PhoneInputField({super.key, required this.onPhoneNumberChanged});
+  const PhoneInputField({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(PhoneInputController());
-    controller.onPhoneNumberChangedCallback = onPhoneNumberChanged;
+    final PhoneInputController controller = Get.put<PhoneInputController>(
+      PhoneInputController(),
+      tag: UniqueKey().toString(),
+      permanent: false,
+    );
+    phoneNumber.bindStream(controller.phoneNumber.stream);
     return SizedBox(
       height: 50,
       child: Stack(
@@ -20,7 +24,7 @@ class PhoneInputField extends GetView<PhoneInputController> {
         children: [
           _buildBoxDecoration(),
           _buildPhoneRegion(),
-          _buildTextField(),
+          _buildTextField(controller),
         ],
       ),
     );
@@ -29,7 +33,7 @@ class PhoneInputField extends GetView<PhoneInputController> {
   Widget _buildBoxDecoration() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.colorWhite,
         borderRadius: BorderRadius.circular(8.0),
       ),
     );
@@ -49,21 +53,24 @@ class PhoneInputField extends GetView<PhoneInputController> {
     );
   }
 
-  Widget _buildSuffixIcon() {
-    return IconButton(
-      icon: const Icon(
-        Icons.clear_rounded,
-        size: 20,
-      ),
-      color: AppColors.color500,
-      onPressed: controller.clearPhoneNumber,
-    );
+  Widget _buildSuffixIcon(PhoneInputController controller) {
+    return Obx(() => controller.isFocused.value
+        ? IconButton(
+            icon: const Icon(
+              Icons.clear_rounded,
+              size: 20,
+            ),
+            color: AppColors.color500,
+            onPressed: controller.clearPhoneNumber,
+          )
+        : const SizedBox.shrink());
   }
 
-  Widget _buildTextField() {
+  Widget _buildTextField(PhoneInputController controller) {
     return TextField(
       keyboardType: TextInputType.number,
       controller: controller.phoneController,
+      focusNode: controller.focusNode,
       style: const TextStyle(
         color: AppColors.color800,
         fontSize: 15,
@@ -84,7 +91,7 @@ class PhoneInputField extends GetView<PhoneInputController> {
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(color: AppColors.color800),
         ),
-        suffixIcon: _buildSuffixIcon(),
+        suffixIcon: _buildSuffixIcon(controller),
       ),
       onChanged: controller.onPhoneNumberChanged,
     );

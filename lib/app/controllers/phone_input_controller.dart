@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class PhoneInputController extends GetxController {
-  Function(String)? onPhoneNumberChangedCallback;
+  var focusNode = FocusNode();
+  var phoneNumber = ''.obs;
+  var isFocused = false.obs;
   TextEditingController phoneController = TextEditingController();
 
   @override
@@ -10,6 +12,9 @@ class PhoneInputController extends GetxController {
     super.onInit();
     phoneController.addListener(() {
       onPhoneNumberChanged(phoneController.text);
+    });
+    focusNode.addListener(() {
+      isFocused.value = focusNode.hasFocus;
     });
   }
 
@@ -37,6 +42,9 @@ class PhoneInputController extends GetxController {
   void onPhoneNumberChanged(String value) {
     // 获取当前光标位置
     int cursorPosition = phoneController.selection.baseOffset;
+    if (cursorPosition < 0) {
+      cursorPosition = 0;
+    }
     // 格式化手机号之前的光标位置
     String beforeText = phoneController.text.substring(0, cursorPosition);
     int digitsBeforeCursor = beforeText.replaceAll(RegExp(r'\D'), '').length;
@@ -64,16 +72,13 @@ class PhoneInputController extends GetxController {
         selection: TextSelection.collapsed(offset: newCursorPosition),
       );
     }
-
-    if (onPhoneNumberChangedCallback != null) {
-      onPhoneNumberChangedCallback!(formatted.replaceAll(' ', ''));
-    }
+    phoneNumber.value = formatted.replaceAll(' ', '');
   }
 
   @override
   void onClose() {
     phoneController.dispose();
-    onPhoneNumberChangedCallback = null;
+    focusNode.dispose();
     super.onClose();
   }
 }

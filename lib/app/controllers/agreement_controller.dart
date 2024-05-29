@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../../constants/constants.dart';
 import '../../services/data_service.dart';
-import '../../services/navigation_service.dart';
+import '../routes/navigation_service.dart';
 import '../../services/user_service.dart';
 class AgreementController extends GetxController {
   final DataService _dataService = Get.find<DataService>();

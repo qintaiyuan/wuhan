@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:wuhan/services/navigation_service.dart';
+import 'package:wuhan/app/routes/navigation_service.dart';
 import 'package:wuhan/theme/app_colors.dart';
 import '../../constants/constants.dart';
 import '../controllers/agreement_controller.dart';

@@ -47,8 +47,10 @@ class AppTranslations extends Translations {
       'thinkAgain': '我再想想',
       "loginWithPhone": "手机号登录",
       "unregisteredPhoneAutoRegister": "未注册的手机号将自动注册",
+      "inputPhoneAndCode": "请输入手机号与密码登录",
       "enterPhoneNumber": "请输入手机号",
       "enterVerificationCode": "请输入验证码",
+      "enterPasswordNumber": "请输入密码",
       "sendVerificationCode": "发送验证码",
       "login": "登录",
       "error": "错误",
@@ -59,7 +61,10 @@ class AppTranslations extends Translations {
       "termsAgreementPrefixTip": "登录即表示您同意我们的",
       "netNotConnected": "网络连接异常，请重试",
       "sendSuccess": "发送成功",
-      "loginSuccess": "登录成功"
+      "loginSuccess": "登录成功",
+      "accountLogin": "密码登录",
+      "verificationCodeLogin": "验证码登录",
+
     },
   };
 }

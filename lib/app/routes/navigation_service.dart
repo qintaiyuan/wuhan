@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../app/routes/app_routes.dart';
+import 'app_routes.dart';
 
 class NavigationService {
   static void offAndToHomePage() {
@@ -10,6 +10,10 @@ class NavigationService {
 
   static void offAndLoginPage() {
     Get.offAndToNamed(AppRoutes.LOGIN);
+  }
+
+  static void toAccountLoginPage() {
+    Get.toNamed(AppRoutes.ACCOUNT_LOGIN);
   }
 
   // 其他页面跳转方法...

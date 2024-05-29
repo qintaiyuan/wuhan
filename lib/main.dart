@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       translations: AppTranslations(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
-      defaultTransition: Transition.leftToRight, // 设置默认的页面跳转动画
+      defaultTransition: Transition.rightToLeftWithFade, // 设置默认的页面跳转动画
       // initialBinding: InitialBindings(), // 不能兼容异步注入
       initialRoute: AppRoutes.SPLASH,
       getPages: AppPages.pages,

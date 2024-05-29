@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/app/data/repositories/passport_respository.dart';
 
-import '../network/services/network_service.dart';
-
 class VerificationCodeInputController extends GetxController {
-  Function(String)? onVerificationCodeChangedCallback;
   var countdown = 0.obs;
   var phoneNum = "".obs;
+  var verificationCode = "".obs;
   var isEnable = false.obs;
   TextEditingController verificationCodeController = TextEditingController();
   final PassportRespository _passportRepository = Get.find();
@@ -42,9 +40,7 @@ class VerificationCodeInputController extends GetxController {
         TextPosition(offset: formatted.length),
       );
     }
-    if (onVerificationCodeChangedCallback != null) {
-      onVerificationCodeChangedCallback!(formatted);
-    }
+    verificationCode.value = formatted;
   }
 
   Future<void> sendVerificationCode() async {

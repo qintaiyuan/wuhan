@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:wuhan/services/navigation_service.dart';
+import 'package:wuhan/app/routes/navigation_service.dart';
 import 'package:wuhan/theme/app_colors.dart';
 
 import '../../constants/constants.dart';
@@ -29,6 +29,7 @@ class SplashController extends GetxController {
       useRootNavigator: false,
       enableDrag: false,
       isDismissible: false,
+      enterBottomSheetDuration: const Duration(milliseconds: 10)
     );
   }
 }
