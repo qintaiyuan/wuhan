@@ -3,16 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/app/routes/navigation_service.dart';
 import 'package:wuhan/theme/app_colors.dart';
-import '../../constants/constants.dart';
-import '../controllers/agreement_controller.dart';
-import '../ui/widgets/submit_button.dart';
+
+import '../../../constants/constants.dart';
+import '../../controllers/agreement_controller.dart';
+import '../widgets/submit_button.dart';
 
 class AgreementBottomSheet extends GetView<AgreementController> {
   const AgreementBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.find<AgreementController>();
     return PopScope(
       canPop: false,
       child: Padding(
@@ -24,8 +24,8 @@ class AgreementBottomSheet extends GetView<AgreementController> {
             Container(
               padding: const EdgeInsets.all(24.0),
               decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+                color: AppColors.colorWhite,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,

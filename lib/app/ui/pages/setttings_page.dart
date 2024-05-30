@@ -10,8 +10,8 @@ class SettingsPage extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(
-        title: "我的设置",
+      appBar: CommonAppBar(
+        title: 'mySettings'.tr,
       ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),
@@ -19,7 +19,7 @@ class SettingsPage extends GetView<SettingsController> {
           children: [
             SettingsItem(
               icon: Icons.person,
-              title: "账号",
+              title: 'account'.tr,
               desc: controller.phoneNumber.value,
               onTap: () {
                 // Handle account item tap
@@ -28,7 +28,7 @@ class SettingsPage extends GetView<SettingsController> {
             const SizedBox(height: 14),
             SettingsItem(
               icon: Icons.info,
-              title: "关于Superhexa",
+              title: 'about'.tr,
               shapeType: ShapeType.topRounded,
               onTap: () {
                 controller.navigateTo('/about');
@@ -36,7 +36,7 @@ class SettingsPage extends GetView<SettingsController> {
             ),
             SettingsItem(
               icon: Icons.help,
-              title: "帮助中心",
+              title: 'help'.tr,
               shapeType: ShapeType.none,
               onTap: () {
                 controller.navigateTo('/help');
@@ -44,7 +44,7 @@ class SettingsPage extends GetView<SettingsController> {
             ),
             SettingsItem(
               icon: Icons.feedback,
-              title: "问题反馈",
+              title: 'feedback'.tr,
               shapeType: ShapeType.bottomRounded,
               onTap: () {
                 controller.navigateTo('/feedback');
@@ -53,7 +53,7 @@ class SettingsPage extends GetView<SettingsController> {
             const SizedBox(height: 14),
             SettingsItem(
               icon: Icons.exit_to_app,
-              title: "退出登录",
+              title: 'logout'.tr,
               showType: ShowType.warningNoArrow,
               onTap: () {
                 controller.logout();

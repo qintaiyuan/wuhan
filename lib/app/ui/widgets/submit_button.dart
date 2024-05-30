@@ -5,6 +5,7 @@ class SubmitButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final bool enable;
+  final Color textColor;
   final Color enabledColor; // 按钮启用时的背景颜色
   final Color disabledColor; // 按钮禁用时的背景颜色
   final double borderRadius;
@@ -15,6 +16,7 @@ class SubmitButton extends StatelessWidget {
     this.enable = true, // 默认为启用状态
     this.enabledColor = AppColors.colorDefault, // 默认启用时的颜色
     this.disabledColor = AppColors.colorBtnUnable, // 默认禁用时的颜色
+    this.textColor = AppColors.colorWhite,
     this.borderRadius = 8.0, // Default border radius
     required this.onPressed,
   });
@@ -36,7 +38,7 @@ class SubmitButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: const TextStyle(color: Colors.white, fontSize: 15),
+          style: TextStyle(color: textColor, fontSize: 15, fontWeight: FontWeight.w600),
         ),
       ),
     );

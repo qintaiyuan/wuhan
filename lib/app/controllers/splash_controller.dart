@@ -5,7 +5,7 @@ import 'package:wuhan/theme/app_colors.dart';
 import '../../constants/constants.dart';
 import '../../services/data_service.dart';
 import '../../services/user_service.dart';
-import '../dialogs/agreement_dialog.dart';
+import '../ui/dialogs/agreement_dialog.dart';
 
 class SplashController extends GetxController {
   final DataService _dataService = Get.find<DataService>();

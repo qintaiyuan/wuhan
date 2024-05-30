@@ -65,6 +65,11 @@ class AppTranslations extends Translations {
       "accountLogin": "密码登录",
       "verificationCodeLogin": "验证码登录",
       "mySettings": "我的设置",
+      "account": "账号",
+      "about": "关于Superhexa",
+      "help": "帮助中心",
+      "feedback": "问题反馈",
+      "logout": "退出登录",
 
     },
   };
