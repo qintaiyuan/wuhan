@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wuhan/app/routes/navigation_service.dart';
 import 'package:wuhan/theme/app_colors.dart';
 
 class DeviceEmpty extends StatelessWidget {
@@ -41,7 +42,7 @@ class DeviceEmpty extends StatelessWidget {
       child: IconButton(
         icon: const Icon(Icons.account_circle, size: 20),
         onPressed: () {
-          // onPressed 回调
+          NavigationService.toSettingsPage();
         },
         color: AppColors.color800, // 设置图标颜色
       ),

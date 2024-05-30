@@ -7,3 +7,16 @@ extension SortedQueryString on Map<String, String> {
     return queryString;
   }
 }
+
+extension PhoneNumberFormatter on String {
+  String formatPhoneNumber() {
+    if (length != 11) {
+      throw ArgumentError('Invalid phone number length. Expected length is 11.');
+    }
+
+    String start = substring(0, 3);
+    String end = substring(7);
+
+    return '$start****$end';
+  }
+}

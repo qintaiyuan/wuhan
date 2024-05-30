@@ -45,6 +45,12 @@ class UserService extends GetxService {
     }
   }
 
+  void clearUser() {
+    // 清空用户信息
+    user.value = null;
+    _dataService.delate(userInfoCache);
+  }
+
   UserAccount? getUser() {
     return user.value;
   }

@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:wuhan/app/bindings/account_login_binding.dart';
+import 'package:wuhan/app/bindings/settings_binding.dart';
 import '../bindings/home_binding.dart';
 import '../bindings/login_binding.dart';
 import '../bindings/splash_binding.dart';
 import '../ui/pages/account_login_page.dart';
 import '../ui/pages/home_page.dart';
 import '../ui/pages/login_page.dart';
+import '../ui/pages/setttings_page.dart';
 import '../ui/pages/splash_page.dart';
 import 'app_routes.dart';
 
@@ -32,6 +34,11 @@ class AppPages {
       name: AppRoutes.ACCOUNT_LOGIN,
       page: () => const AccountLogin(),
       binding: AccountLoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SETTINGS,
+      page: () => const SettingsPage(),
+      binding: SettingsBinding(),
     )
   ];
 }

@@ -15,6 +15,9 @@ class NavigationService {
   static void toAccountLoginPage() {
     Get.toNamed(AppRoutes.ACCOUNT_LOGIN);
   }
+  static void toSettingsPage() {
+    Get.toNamed(AppRoutes.SETTINGS);
+  }
 
   // 其他页面跳转方法...
   static void launchURL(String url) async {

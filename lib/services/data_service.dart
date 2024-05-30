@@ -48,6 +48,10 @@ class DataService extends GetxService{
     dataBox.put(key, value);
   }
 
+  void delate(String key) {
+    dataBox.delete(key);
+  }
+
   dynamic get(String key) {
     return dataBox.get(key);
   }

@@ -64,6 +64,7 @@ class AppTranslations extends Translations {
       "loginSuccess": "登录成功",
       "accountLogin": "密码登录",
       "verificationCodeLogin": "验证码登录",
+      "mySettings": "我的设置",
 
     },
   };
