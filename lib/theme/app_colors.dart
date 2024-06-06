@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 class AppColors {
+  static const Color colorTransparent = Color(0X00000000); // 页面背景色
   static const Color colorPageBackground = Color(0xFFF5F5F7); // 页面背景色
   static const Color color100 = Color(0xFFF5F5F5); // 100
   static const Color color200 = Color(0xFFE4E4E4); // 200

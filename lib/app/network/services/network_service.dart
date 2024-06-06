@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:wuhan/app/data/models/unlogin_event_model.dart';
-import 'package:wuhan/app/network/interceptor/add_cookies_interceptor.dart';
-import 'package:wuhan/app/network/interceptor/received_cookies_interceptor.dart';
 
 import '../../../constants/constants.dart';
 import '../../../services/connectivity_service.dart';
 import '../../../services/event_bus_service.dart';
 import '../../data/models/response_model.dart';
+import '../interceptor/add_cookies_interceptor.dart';
 import '../interceptor/header_interceptor.dart';
+import '../interceptor/received_cookies_interceptor.dart';
 
 class NetworkService extends GetxService {
   late Dio _dio;

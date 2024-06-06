@@ -15,4 +15,12 @@ class AppStyle {
     fontWeight: FontWeight.w400,
     color: AppColors.color500,
   );
+
+  static const dialogDeviceNameStyle = TextStyle(
+    fontSize: 24,
+    height: 1.0,
+    fontWeight: FontWeight.w700,
+    color: AppColors.color800,
+  );
+
 }

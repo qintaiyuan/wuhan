@@ -3,9 +3,14 @@ import 'package:get/get.dart';
 import 'package:wuhan/app/controllers/bind_device_controller.dart';
 import 'package:wuhan/app/ui/base/base_dialog.dart';
 import 'package:wuhan/app/ui/dialogs/bind_device_add_dialog.dart';
+import 'package:wuhan/app/ui/dialogs/bind_device_connecting_dialog.dart';
+import 'package:wuhan/app/ui/dialogs/bind_device_failed_dialog.dart';
+import 'package:wuhan/app/ui/dialogs/bind_device_find_more_dialog.dart';
+import 'package:wuhan/app/ui/dialogs/bind_device_find_one_dialog.dart';
 import 'package:wuhan/app/ui/dialogs/bind_device_guide_dialog.dart';
 
 import '../../data/models/bind_device_state_model.dart';
+import 'bind_device_success_dialog.dart';
 
 class BindDeviceDialog extends BaseDialog {
   const BindDeviceDialog({super.key, super.canPop = false});
@@ -21,28 +26,43 @@ class BindDeviceDialog extends BaseDialog {
       height: 400,
       width: double.infinity,
       child: Obx(() {
-        switch (controller.currentScreen.value) {
-          case DeviceBindState.SETUP_GUIDE:             //引导页面
-            return BindDeviceGuideDialog(controller: controller);
-          case DeviceBindState.ADD_DEVICE:
-            return BindDeviceAddDialog(controller: controller);
-          // case DeviceBindState.CONNECT_SUCCESS:
-          //   return _buildConnectSuccess(controller);
-          // case DeviceBindState.CONNECT_FAILED:
-          //   return _buildConnectFailed(controller);
-          // case DeviceBindState.CONNECTING:
-          //   return _buildConnecting(controller);
-          // case DeviceBindState.DEVICE_SEARCH_LIST:
-          //   return _buildDeviceSearchList(controller);
-          // case DeviceBindState.FOUND_DEVICE:
-          //   return _buildFoundDevice(controller);
-          // case DeviceBindState.SETUP_GUIDE:
-          //   return _buildSetupGuide(controller);
-          default:
-            return Container();
-        }
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          child: _getChildWidget(controller.currentScreen.value, controller),
+        );
       }),
-      // child: Text("aaaaa"),
     );
+  }
+
+  Widget _getChildWidget(
+      DeviceBindState state, BindDeviceController controller) {
+    switch (state) {
+      case DeviceBindState.SETUP_GUIDE:
+        return BindDeviceGuideDialog(
+            controller: controller, key: ValueKey(state));
+      case DeviceBindState.ADD_DEVICE:
+        return BindDeviceAddDialog(
+            controller: controller, key: ValueKey(state));
+      case DeviceBindState.DEVICE_FIND_ONE:
+        return BindDeviceFindOneDialog(
+            controller: controller, key: ValueKey(state));
+      case DeviceBindState.DEVICE_FIND_MORE:
+        return BindDeviceFindMoreDialog(
+            controller: controller, key: ValueKey(state));
+      case DeviceBindState.CONNECTING:
+        return BindDeviceConnectingDialog(
+            controller: controller, key: ValueKey(state));
+      case DeviceBindState.CONNECT_SUCCESS:
+        return BindDeviceSuccessDialog(
+            controller: controller, key: ValueKey(state));
+      case DeviceBindState.CONNECT_FAILED:
+        return BindDeviceFailedDialog(
+            controller: controller, key: ValueKey(state));
+      default:
+        return Container(key: ValueKey(state));
+    }
   }
 }

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:wuhan/app/data/models/device_model.dart';
+import '../app/data/models/device_model.dart';
 import '../app/network/services/network_service.dart';
-import '../constants/constants.dart';
+import '../constants/Constants.dart';
 
 class DeviceService extends GetxService {
   var devices = <DeviceInfo>[].obs;
@@ -23,6 +23,7 @@ class DeviceService extends GetxService {
         fromJsonT: (json) =>
             (json as List).map((item) => DeviceInfo.fromJson(item)).toList(),
       );
+      print('home_controller - ${response.data}');
       devices.clear();
       devices.addAll(response.data ?? []);
       _deviceBox.clear();

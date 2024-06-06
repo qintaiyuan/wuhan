@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wuhan/app/bluetooth/ble/services/ble_service.dart';
 import 'package:wuhan/services/app_info_service.dart';
 import 'package:wuhan/services/data_service.dart';
 import 'package:wuhan/app/network/services/network_service.dart';
@@ -18,6 +19,7 @@ class InitialBindings extends Bindings {
       await userService.onInit();
       return userService;
     });
+    Get.put(BleService());
     await Get.putAsync(() async => await AppInfoService().init());
     Get.put(EventBus());
     Get.lazyPut<ConnectivityService>(() => ConnectivityService());

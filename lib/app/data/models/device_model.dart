@@ -1,7 +1,8 @@
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:hive/hive.dart';
 
 @HiveType(typeId: 0)
-class DeviceInfo extends HiveObject{
+class DeviceInfo extends HiveObject {
   @HiveField(0)
   int deviceId;
   @HiveField(1)
@@ -14,15 +15,17 @@ class DeviceInfo extends HiveObject{
   final String leftSn;
   @HiveField(5)
   final String rightSn;
+  @HiveField(6)
+  DiscoveredDevice? device;
 
   DeviceInfo(
       {required this.deviceId,
-        required this.model,
-        required this.nickname,
-        required this.mac,
-        required this.leftSn,
-        required this.rightSn
-      });
+      required this.model,
+      required this.nickname,
+      required this.mac,
+      required this.leftSn,
+      required this.rightSn,
+      this.device});
 
   factory DeviceInfo.fromJson(Map<String, dynamic> json) {
     return DeviceInfo(
@@ -44,5 +47,10 @@ class DeviceInfo extends HiveObject{
       'leftSn': leftSn,
       'rightSn': rightSn,
     };
+  }
+
+  @override
+  String toString() {
+    return 'DeviceInfo{id: $deviceId, name: $nickname, model: $model, rightSn: $rightSn, leftSn: $leftSn, device: $device}';
   }
 }

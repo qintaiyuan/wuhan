@@ -23,7 +23,8 @@ dependencies:
   flutter_svg: ^2.0.4
   connectivity_plus: ^2.0.2
   lottie:
-
+  flutter_reactive_ble: ^5.3.1
+  permission_handler: ^10.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -37,5 +38,6 @@ flutter:
         - asset: fonts/MaShanZheng-Regular.ttf
   assets:
     - assets/images/               # images下所有的图片都生效
+    - assets/frame/device/         # device下所有的图片都生效
     - assets/anims/                # anims下所有的动画都生效
     - assets/anims/gestureimages/  # gestureimages下所有的动画都生效

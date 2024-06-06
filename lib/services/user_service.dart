@@ -32,6 +32,7 @@ class UserService extends GetxService {
 
   void setUser(UserAccount newUser) {
     user.value = newUser;
+    print("user==${user.value?.passToken}");
     _saveUserToCache(newUser);
   }
 

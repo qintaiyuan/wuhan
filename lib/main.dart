@@ -8,6 +8,7 @@ import 'package:wuhan/transliate/app_translations.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 
+
 void main() async {
   // 确保 Flutter 框架正确初始化的实用方法，
   // 通常在需要执行依赖于 Flutter 的异步操作或插件初始化之前调用。
