@@ -8,7 +8,9 @@ abstract class IBleService {
 
   void stopScan();
 
-  void connectToDevice(String deviceId);
+  void reConnectDevice(DeviceInfo deviceInfo);
+
+  Future<bool> bindDevice(DeviceInfo deviceInfo);
 
   void disconnectFromDevice(String deviceId);
 }

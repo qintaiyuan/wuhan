@@ -104,7 +104,7 @@ class BindDeviceFindMoreDialog extends StatelessWidget {
       width: 62,
       height: 32,
       child: ElevatedButton(
-        onPressed: () => {controller.connectDevice(deviceInfo)},
+        onPressed: () => {controller.bindDevice(deviceInfo)},
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.colorDefault10,
           padding: const EdgeInsets.all(0),

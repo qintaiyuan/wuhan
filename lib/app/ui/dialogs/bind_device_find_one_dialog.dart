@@ -62,7 +62,7 @@ class BindDeviceFindOneDialog extends StatelessWidget {
           confirmButtonText: '连接',
           onCancelPressed: controller.dimissDialog, // Get.back() 是取消按钮的默认操作
           onConfirmPressed: () => {
-            controller.connectDevice(deviceInfo)
+            controller.bindDevice(deviceInfo)
           },
         ),
       ],

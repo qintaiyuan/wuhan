@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wuhan/app/bluetooth/ble/services/ble_service.dart';
+import 'package:wuhan/app/data/models/binding_state.dart';
 
+import '../../services/device_service.dart';
 import '../bluetooth/ble/scan/strategy/anchor_scan_strategy.dart';
 import '../data/models/bind_device_state_model.dart';
 import '../data/models/device_model.dart';
@@ -13,7 +15,9 @@ class BindDeviceController extends GetxController
   RxList<DeviceInfo> devicesList = <DeviceInfo>[].obs;
   final BleService _bleService = Get.find();
   var currentScreen = DeviceBindState.SETUP_GUIDE.obs;
-
+  Rx<BindingState> bindState = Rx(BindingState.CONNECTING);
+  final DeviceService _deviceService = Get.find<DeviceService>();
+  DeviceInfo? _deviceInfo;
   @override
   void onInit() {
     super.onInit();
@@ -38,9 +42,16 @@ class BindDeviceController extends GetxController
     }
   }
 
-  void connectDevice(DeviceInfo deviceInfo) {
+  void bindDevice(DeviceInfo deviceInfo) async {
     _switchScreen(DeviceBindState.CONNECTING);
     stopScan();
+    final success = await _bleService.bindDevice(deviceInfo);
+    if (success) {
+      bindState.value = BindingState.SUCCESS;
+      _deviceInfo = deviceInfo;
+    } else {
+      bindState.value = BindingState.FAILED;
+    }
   }
 
   void seeMoreDevice() {
@@ -67,8 +78,15 @@ class BindDeviceController extends GetxController
     stopScan();
   }
 
-  void switchSuccessPage() {
+  void switchSuccessPage() async {
     _switchScreen(DeviceBindState.CONNECT_SUCCESS);
+    await Future.delayed(const Duration(seconds: 2));
+    _deviceService.addDevice(_deviceInfo!);
+    dimissDialog();
+  }
+
+  void switchFailedPage() {
+    _switchScreen(DeviceBindState.CONNECT_FAILED);
   }
 
   void switchGuidePage() {

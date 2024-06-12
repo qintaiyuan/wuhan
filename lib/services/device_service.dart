@@ -12,7 +12,12 @@ class DeviceService extends GetxService {
 
   Future<DeviceService> init() async {
     _deviceBox = await Hive.openBox<DeviceInfo>(deviceBox);
+    _findCurDevice();
     return this;
+  }
+
+  void _findCurDevice() {
+    currentDevice.value = _deviceBox.getAt(0);
   }
 
   Future<void> fetchDevicesFromNetwork() async {
@@ -36,13 +41,6 @@ class DeviceService extends GetxService {
   void addDevice(DeviceInfo device) {
     devices.add(device);
     _deviceBox.add(device);
-  }
-
-  void connectToDevice(DeviceInfo device) {
     currentDevice.value = device;
-  }
-
-  void disconnectDevice() {
-    currentDevice.value = null;
   }
 }

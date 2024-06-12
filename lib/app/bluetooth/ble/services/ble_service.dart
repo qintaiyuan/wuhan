@@ -1,15 +1,21 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
+import 'package:wuhan/app/bluetooth/ble/controller/strategy/device_strategy.dart';
 import 'package:wuhan/app/bluetooth/ble/scan/device_scan_helper.dart';
 import 'package:wuhan/app/bluetooth/ble/scan/strategy/scan_strategy.dart';
 import 'package:wuhan/app/data/models/device_model.dart';
 
+import '../../../utils/log_manager.dart';
 import '../controller/device_controller.dart';
-import '../interf/ble_interface.dart';
+import '../interf/ible_service.dart';
+import '../interf/idevice_controller.dart';
 
 class BleService extends GetxService implements IBleService {
   final DeviceScanHelper deviceScanHelper = DeviceScanHelper();
   RxList<DeviceInfo> devicesList = <DeviceInfo>[].obs;
-  RxMap connectedDevices = RxMap<String, DeviceController>();
+  RxMap connectedDevices = RxMap<String, IdeviceController>();
+  Rxn<IdeviceController> curDeviceController = Rxn<IdeviceController>();
 
   @override
   void scanDevices({required List<ScanStrategy> strategies}) {
@@ -32,23 +38,16 @@ class BleService extends GetxService implements IBleService {
     deviceScanHelper.stopScan();
   }
 
-  // @override
-  // Stream<DiscoveredDevice> scanForDevices(
-  //     {required List<ScanFilter> strategies}) {
-  //   return _ble.scanForDevices(
-  //       withServices: [], scanMode: ScanMode.lowLatency).where((device) {
-  //     return strategies
-  //         .any((strategy) => strategy.matches(device.manufacturerData));
-  //   });
-  // }
-
   @override
-  void connectToDevice(String deviceId) {
+  void reConnectDevice(DeviceInfo deviceInfo) {
+    final deviceId = deviceInfo.device!.id;
     if (!connectedDevices.containsKey(deviceId)) {
-      final controller = DeviceController(deviceId);
+      final controller = DeviceController(AnchorDeviceStrategy(deviceId));
       connectedDevices[deviceId] = controller;
       Get.put(controller, tag: deviceId);
+      curDeviceController.value = controller;
     }
+    curDeviceController.value?.bindDevice();
   }
 
   @override
@@ -57,6 +56,24 @@ class BleService extends GetxService implements IBleService {
       connectedDevices[deviceId]?.disconnectFromDevice();
       connectedDevices.remove(deviceId);
       Get.delete<DeviceController>(tag: deviceId);
+    }
+  }
+
+  @override
+  Future<bool> bindDevice(DeviceInfo deviceInfo) async {
+    try {
+      final deviceId = deviceInfo.device!.id;
+      final controller = DeviceController(AnchorDeviceStrategy(deviceId));
+      final success = await controller.bindDevice();
+      if(success) {
+        connectedDevices[deviceId] = controller;
+        Get.put(controller, tag: deviceId);
+        curDeviceController.value = controller;
+      }
+      return success;
+    } catch (e) {
+      LogManager.e("Error bindDevice: $e");
+      return false;
     }
   }
 }

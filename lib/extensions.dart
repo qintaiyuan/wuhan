@@ -70,3 +70,22 @@ extension ListExtension<T> on List<T> {
     return macBytes.map((byte) => byte.toRadixString(16).padLeft(2, '0').toUpperCase()).join(':');
   }
 }
+
+extension IntExtensions on int {
+  List<int> toByteArray({bool fullInt = true}) {
+    int len = fullInt ? 4 : 2;
+    List<int> targets = List.filled(len, 0);
+
+    if (len == 4) {
+      targets[3] = this & 0xFF;
+      targets[2] = (this >> 8) & 0xFF;
+      targets[1] = (this >> 16) & 0xFF;
+      targets[0] = (this >> 24) & 0xFF;
+    } else {
+      targets[1] = this & 0xFF;
+      targets[0] = (this >> 8) & 0xFF;
+    }
+
+    return targets;
+  }
+}

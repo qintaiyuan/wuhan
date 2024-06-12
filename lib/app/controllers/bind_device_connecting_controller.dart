@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:wuhan/app/data/models/binding_state.dart';
 
 import 'bind_device_controller.dart';
 
@@ -113,8 +114,18 @@ class BindDeviceConnectingController extends GetxController
       })
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          bindDeviceController.switchSuccessPage();
-          _disposeAnim2();
+          switch (bindDeviceController.bindState.value) {
+            case BindingState.CONNECTING:
+              animationController2.reset(); // 重置动画值
+              animationController2.forward(); // 重新启动动画
+              break;
+            case BindingState.SUCCESS:
+              bindDeviceController.switchSuccessPage();
+              break;
+            case BindingState.FAILED:
+              bindDeviceController.switchFailedPage();
+              break;
+          }
         }
       });
     _preloadImages1();

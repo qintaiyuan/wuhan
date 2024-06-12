@@ -12,11 +12,39 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       body: Obx(() {
         final currentDevice = controller.currentDevice.value;
+        final currentController = controller.curDeviceController.value;
         if (currentDevice == null) {
           return const DeviceEmpty();
-          // return FullWidthContainerExample();
         } else {
-          return Center(child: Text('Connected to: ${currentDevice.nickname}'));
+          return RefreshIndicator(
+              onRefresh: controller.refreshItems,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemCount: 30,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Center(
+                      child: Text('Item $index'),
+                    ),
+                  );
+                },
+              ),
+              // child:  Column(
+              //   children: [
+              //     Text('Connected to: ${currentDevice.nickname}'),
+              //     Text(
+              //         'Connect state: ${currentController?.connectionState.value}'),
+              //   ],
+              // )
+          );
+          // Column(
+          //   children: [
+          //     Text('Connected to: ${currentDevice.nickname}'),
+          //     Text('Connect state: ${currentController?.connectionState.value}'),
+          //   ],
+          // );
         }
       }),
     );

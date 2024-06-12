@@ -51,11 +51,6 @@ class BindDeviceSuccessController extends GetxController
         .animate(animationController1)
       ..addListener(() {
         currentFrame.value = animation1.value;
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          // animationController1.reset();
-        }
       });
     _preloadImages();
   }
